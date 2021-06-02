@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    header{
+        display: flex;
+        justify-content: space-between;
+        width: 95%;
+    }
+    #clicker{
+        background: blue;
+        color: white;
+    }
+    .thought{
+        width: 50%;
+    }
+
+    .like{
+        width: 50%;
+        display: inline-flex;
+    }
+    .bord{
+        border: solid 1px black;
+        width: 50%;
+        height: 90%;
+    }
+    .det{
+        margin-left: 20px;
+    }
+    .del{
+        margin-left: 20px;
+    }
+    .count{
+        margin-left: 20px;
+    }
+</style>
+<body>
+    <header>
+        <h1>Hi {{request.session.first_name}}</h1>
+        <h2><a href="logout">logout</a></h4></form></h2>
+    </header>
+    <form action="/addthought" method="post">
+        {% csrf_token %}
+        <textarea name="mypost" placeholder="Post a Great Thought Here!" cols="70" rows="2"></textarea>
+        <input type="submit" value="Add a Thought!" id="clicker">
+    </form>
+    <div class="error">
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+            </ul>
+            {% endif %}
+</div>
+
+    <hr>
+    <div class="thought">
+    {% for all in thoughts %}
+
+        <div class="own">
+            <p>{{all.own.first_name}} says:</p>
+            <p class="bord">{{all.post}}</p>
+
+        </div>
+        <div class="like">
+            <a href="/thought/{{all.id}}" class="det">details</a>
+            {% if all in myown %}
+                <a href="/delet/{{all.id}}" class="del">delete</a>
+            {%endif%}
+            <p class="count">{{all.like.all|length}} people like this </p>
+        </div>
+    {%endfor%}
+    </div>
+</body>
+</html>
