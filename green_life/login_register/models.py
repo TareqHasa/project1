@@ -74,4 +74,4 @@ def return_user(id):
 
 def get_user_cars(id):
     user= users.objects.get(id=id)
-    return user
+    return u
