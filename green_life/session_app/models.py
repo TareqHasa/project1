@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.db.models.deletion import CASCADE
+from  login_register.models import *
 class Doctor(models.Model):
     first_name=models.CharField(max_length=255)
     last_name=models.CharField(max_length=255)
@@ -11,12 +12,25 @@ class Doctor(models.Model):
 
 
 
-class Session(models.Model):
+class Appointment(models.Model):
     session_about=models.CharField(max_length=255)
     duration=models.CharField(max_length=255)
     desc=models.CharField(max_length=255)
     date=models.DateField()
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
-    models.ForeignKey(patient_id)
+    patient_id= models.ManyToManyField(users, related_name='sessions')
+    dr_id=models.ForeignKey(Doctor,related_name='docname' ,on_delete=CASCADE)
+
+
+
+class Article (models.Model):
+    title=models.CharField(max_length=255)
+    article_content=models.TextField()
+    doctor_who_wrote=models.ForeignKey(Doctor,related_name="articles",on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+
     

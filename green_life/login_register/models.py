@@ -42,19 +42,7 @@ class users(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects= userModels()
 
-class ThoughtModels(models.Manager):
-    def addpost(self, postData):
-        errors = {}
-        if len(postData['mypost']) < 5:
-            errors["mypost"] = "you idea should be at least 5characthers"
-        return errors
-class Thought(models.Model):
-    post=models.TextField()
-    own= models.ForeignKey(users,related_name='mypost',on_delete=CASCADE)
-    like = models.ManyToManyField(users,related_name="loved")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    objects= ThoughtModels()
+
 
 
 def create_user(fname,lname,email,passwd):
@@ -72,6 +60,3 @@ def return_user(id):
     user= users.objects.get(id=id)
     return user
 
-def get_user_cars(id):
-    user= users.objects.get(id=id)
-    return u

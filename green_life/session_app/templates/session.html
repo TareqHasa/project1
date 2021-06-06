@@ -1,47 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Doctor</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/doctor.css' %}"> 
-        <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
-
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <style>
-        .pic{
-            width: 300px;
-            height: 150px;
-        }
-        
-        .new{
-            width: 300px;
-            margin-left: 10px;
-        
-        }
-        
-        .post{
-            border: solid 2px black;
-        }
-        
-        
-        section{
-            border: solid 2px black;
-            margin-left: 400px;
-        
-        }
-        
-        
-        .page{
-            display: flex;
-            margin-top: 5%;
-        }
-    </style>
-    </head>
-  
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOKaSession</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="home.css">
+</head>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -81,34 +49,10 @@
     <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 
 integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<div class="page">
-<div class="new">
-    <img src="" alt="" class="pic">
-    <h2>Doctor Name :</h2>
-        <label for="phoneno">Phone Number:</label>
-        <input type="number" name="phoneno"><br>
-    <p>{{doctor.phoneno}}</p><br>
-    <br> <br>
-    <div class="post">
-        <a href="">article</a>  
-        
-    </div>
-</div> 
-<section>
-    <h2>Schedule</h2>
-    <form action="session/createsession/{{request.session['doctor_id]}}" method="POST">
-        {%csrf_token%}
-        <label for="sessname">Session Name : </label>
-        <input type="text" placeholder="Session Name" name="sessionname"><br>
-        <label for="date">Data:</label>
-        <input type="date" name="date"><br>
-        <label for="time">Time:</label>
-        <input type="time"><br>
-        <label for="desc">Description:</label> <br>
-        <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
-        <input type="submit" value="Book"><br>
-    </form>
-</section>
-</div>
+    {% for all in docinfo %}
+   <a href="">{{all.session_about}}</a> 
+   <p><a href="doctoe/{{all.dr_id.id}}">{{all.dr_id.first_name}} {{all.dr_id.last_name}}</a></p>
+   <p><a href="/book/{{all.id}}"></a></p>
+    {%endfor%}
 </body>
 </html>
